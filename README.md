@@ -37,6 +37,18 @@ This repository provides a **reproducible baseline pipeline** for tuberculosis (
 
 ---
 
+- Reproducibility notes
+
+  - All splits are grouped by speaker to prevent leakage.
+
+  - Probability calibration is fit using OOF predictions within each outer fold.
+
+  - Threshold selection and conformal quantiles are computed using a disjoint CP-calibration subset.
+
+  - The outer test fold is used only for final evaluation.
+
+---
+
 If you use this repository, please cite the accompanying paper (BibTeX to be added once available):
 
 @article{TODO,

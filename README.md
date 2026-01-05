@@ -29,9 +29,9 @@ This repository provides a **reproducible baseline pipeline** for tuberculosis (
 
 - **Uncertainty quantification (Conformal Prediction)**
   - Split conformal prediction with nonconformity score:
-    \[
+    $\[
       s = 1 - p(y \mid x)
-    \]
+    \]$
   - Report: **coverage**, **average set size**, **singleton rate**
   - Both **waveform-level** and **speaker-level (mean-aggregated)** evaluation
 

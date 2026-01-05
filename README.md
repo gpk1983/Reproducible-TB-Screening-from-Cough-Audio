@@ -37,7 +37,3 @@ This repository provides a **reproducible baseline pipeline** for tuberculosis (
 
 ---
 
-## Repository layout (recommended)
-
-You can keep a single script initially, but this structure works well once the project grows:
-

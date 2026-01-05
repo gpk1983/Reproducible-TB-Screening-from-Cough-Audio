@@ -37,3 +37,13 @@ This repository provides a **reproducible baseline pipeline** for tuberculosis (
 
 ---
 
+If you use this repository, please cite the accompanying paper (BibTeX to be added once available):
+
+@article{TODO,
+  title   = {Reproducible TB Screening from Cough Audio: Baseline Models, Clinical Variables, and Uncertainty Quantification},
+  author  = {TODO},
+  journal = {TODO},
+  year    = {TODO}
+}
+
+

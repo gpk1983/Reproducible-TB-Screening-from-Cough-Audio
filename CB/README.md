@@ -10,9 +10,9 @@ CatBoost is a **gradient-boosted decision tree (GBDT)** model trained to predict
 $\mathbf{v} \in \mathbb{R}^{d}.$
 
 It builds an additive model:
-\begin{equation}
+$$
 F_t(\mathbf{v}) = F_{t-1}(\mathbf{v}) + \eta\, h_t(\mathbf{v}),
-\end{equation}
+$$
 where $\eta$ is the learning rate and $h_t$ are decision trees chosen to reduce the loss gradient.
 
 In CatBoost we use:

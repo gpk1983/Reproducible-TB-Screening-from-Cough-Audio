@@ -14,11 +14,11 @@ This repository provides a **reproducible baseline pipeline** for tuberculosis (
   - CatBoost (tree-ensemble baseline)
 
 - **Feature extraction**
-  - Acoustic features from cough (e.g., MFCC-based and spectral descriptors, pooled via summary statistics)
+  - Acoustic features from cough (e.g., MFCC-based, Chroma-based and spectral descriptors, pooled via summary statistics)
   - Acoustic features fused with clinical variables (routine patient inputs; parsed and imputed)
 
 - **Speaker-independent evaluation**
-  - Outer CV: **10-fold StratifiedGroupKFold** (grouped by speaker/subject)
+  - Outer CV: **10-fold StratifiedGroupKFold** (grouped by cougher/subject)
   - Inner CV: **5-fold StratifiedGroupKFold** on the **proper-train** partition (hyperparameter tuning)
 
 - **Leakage-free post-processing**
@@ -33,13 +33,13 @@ This repository provides a **reproducible baseline pipeline** for tuberculosis (
       s = 1 - p(y \mid x)
     \]$
   - Report: **coverage**, **average set size**, **singleton rate**
-  - Both **waveform-level** and **speaker-level (mean-aggregated)** evaluation
+  - Both **waveform-level** and **cougher-level (mean-aggregated)** evaluation
 
 ---
 
 - Reproducibility notes
 
-  - All splits are grouped by speaker to prevent leakage.
+  - All splits are grouped by cougher to prevent leakage.
   - Probability calibration is fit using OOF predictions within each outer fold.
   - Threshold selection and conformal quantiles are computed using a disjoint CP-calibration subset.
   - The outer test fold is used only for final evaluation.

@@ -135,14 +135,14 @@ This avoids using the outer test fold to set \(\tau\).
 
 ---
 
-## 9) Waveform-level vs speaker-level predictions
+## 9) Waveform-level vs cougher-level predictions
 
 - **Waveform-level**: each recording yields a calibrated probability $p^{\text{cal}}_j$.
 - **Cougher-level**: for a cougher with recordings $\{j\}$, aggregate:
   
   $\bar{p}^{\text{cal}} = \frac{1}{m}\sum_{j=1}^{m} p^{\text{cal}}_j$
 
-Metrics and uncertainty can be reported at both levels, but **conformal prediction is evaluated at speaker level** to better respect exchangeability when multiple correlated recordings exist per cougher.
+Metrics and uncertainty can be reported at both levels, but **conformal prediction is evaluated at cougher level** to better respect exchangeability when multiple correlated recordings exist per cougher.
 
 ---
 

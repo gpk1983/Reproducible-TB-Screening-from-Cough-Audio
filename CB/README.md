@@ -7,9 +7,7 @@ This document explains **how CatBoost is used in our TB cough-screening baseline
 ## 1) What CatBoost is modeling here
 
 CatBoost is a **gradient-boosted decision tree (GBDT)** model trained to predict TB positivity from a feature vector:
-\[
-\mathbf{v} \in \mathbb{R}^{d}.
-\]
+$\mathbf{v} \in \mathbb{R}^{d}.$
 
 It builds an additive model:
 \[

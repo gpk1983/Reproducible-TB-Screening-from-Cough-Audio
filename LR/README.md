@@ -18,7 +18,7 @@ $\hat{p}(y{=}1 \mid \mathbf{v}) = \sigma(\theta^\top \tilde{\mathbf{v}}),
 \quad \tilde{\mathbf{v}} = [1, \mathbf{v}^\top]^\top,
 \quad \sigma(z)=\frac{1}{1+e^{-z}}.$
 
-Training fits \(\theta\) by maximum likelihood with **L2 regularization** (scikit‑learn’s `LogisticRegression` with `penalty="l2"`).
+Training fits $\theta$ by maximum likelihood with **L2 regularization** (scikit‑learn’s `LogisticRegression` with `penalty="l2"`).
 
 ---
 
@@ -82,7 +82,7 @@ Hyperparameters are tuned using an inner **5-fold stratified grouped CV** (group
 - `random_state = 42`
 
 **Tuned hyperparameters**
-- **Inverse regularization strength** \(C \in \{10^{-4}, 5\cdot10^{-4}, 10^{-3}, 10^{-2}, 5\cdot10^{-2}, 10^{-1}\}\)
+- **Inverse regularization strength** $C \in \{10^{-4}, 5\cdot10^{-4}, 10^{-3}, 10^{-2}, 5\cdot10^{-2}, 10^{-1}\}$.
 - `penalty = "l2"`
 - `solver ∈ {"liblinear", "lbfgs"}`
 - `class_weight ∈ {None, "balanced"}`
@@ -155,16 +155,15 @@ $s(\mathbf{x}, y) = 1 - \hat{p}^{\text{cal}}(y \mid \mathbf{x})$
 On the **CP-calibration subset** we compute $q̂(\alpha)$, the $(1-\alpha)$-quantile of scores.
 
 For a new test example \(\mathbf{x}\), the prediction set is:
-\[
-\Gamma_\alpha(\mathbf{x}) = \{y \in \{0,1\} \;:\; 1-\hat{p}^{\text{cal}}(y\mid \mathbf{x}) \le q̂(\alpha)\}.
-\]
+
+$\Gamma_\alpha(\mathbf{x}) = \{y \in \{0,1\} : 1-\hat{p}^{\text{cal}}(y\mid \mathbf{x}) \le q̂(\alpha)\}$
 
 We report:
 - empirical **coverage**,
 - mean **set size**,
 - **singleton rate** (fraction of sets of size 1),
 
-typically at \(\alpha \in \{0.10, 0.05\}\).
+typically at $\alpha \in \{0.10, 0.05\}$.
 
 ---
 
@@ -176,13 +175,3 @@ typically at \(\alpha \in \{0.10, 0.05\}\).
   - conformal prediction efficiency.
 
 ---
-
-## 12) Where to look in the code
-
-Search for:
-- the LR pipeline construction (`SimpleImputer`, `StandardScaler`, `LogisticRegression`),
-- the inner-CV loop (selection of best hyperparameters by mean UAR),
-- OOF collection + isotonic fitting,
-- threshold computation on the CP-calibration subset,
-- conformal quantile computation and prediction-set evaluation.
-

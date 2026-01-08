@@ -14,7 +14,7 @@ where in our implementation the **acoustic feature vector has length \(d=261\)**
 
 Logistic Regression models the probability of TB positivity:
 
-$\hat{p}(y{=}1 \mid \mathbf{v}) \;=\; \sigma(\theta^\top \tilde{\mathbf{v}}),
+$\hat{p}(y{=}1 \mid \mathbf{v}) = \sigma(\theta^\top \tilde{\mathbf{v}}),
 \quad \tilde{\mathbf{v}} = [1, \mathbf{v}^\top]^\top,
 \quad \sigma(z)=\frac{1}{1+e^{-z}}.$
 

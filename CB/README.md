@@ -11,7 +11,7 @@ $\mathbf{v} \in \mathbb{R}^{d}.$
 
 It builds an additive model:
 
-$F_t(\mathbf{v}) = F_{t-1}(\mathbf{v}) + \eta\, h_t(\mathbf{v})$
+$F_t(\mathbf{v}) = F_{t-1}(\mathbf{v}) + \eta h_t(\mathbf{v})$
 
 where $\eta$ is the learning rate and $h_t$ are decision trees chosen to reduce the loss gradient.
 
@@ -81,7 +81,7 @@ We use the **same** splitting strategy as in LR:
 
 ---
 
-## 5) Hyperparameter selection criterion (same philosophy as LR)
+## 5) Hyperparameter selection criterion
 
 Even though CatBoost can be trained with many internal objectives, **our selection criterion is screening-aligned**:
 
@@ -102,9 +102,9 @@ After selecting the best CatBoost hyperparameters, we calibrate probabilities wi
 
 1. Generate out-of-fold probabilities \(p_i^{\text{OOF}}\) (each sample scored by a model that did not train on it).
 2. Fit isotonic regression:
-   \[
-   p^{\text{cal}} = f_{\text{iso}}(p^{\text{raw}}).
-   \]
+
+   $p^{\text{cal}} = f_{\text{iso}}(p^{\text{raw}}).$
+   
 3. Refit CatBoost on the full proper training pool with best hyperparameters.
 4. Apply isotonic mapping to:
    - the CP-calibration subset,
@@ -119,17 +119,16 @@ This ensures calibration is **leakage-free**.
 Thresholds are chosen **after calibration** and **only** on the CP-calibration subset:
 
 - waveform-level threshold \(\tau_w\) on per-recording probabilities,
-- speaker-level threshold \(\tau_s\) after aggregating recordings per cougher.
+- cougher-level threshold \(\tau_s\) after aggregating recordings per cougher.
 
 ---
 
 ## 8) Waveform-level vs speaker-level outputs
 
-- **Waveform-level**: score each recording → \(p^{\text{cal}}_j\).
-- **Speaker-level**: average probabilities per cougher:
-  \[
-  \bar{p}^{\text{cal}} = \frac{1}{m}\sum_{j=1}^m p^{\text{cal}}_j.
-  \]
+- **Waveform-level**: score each recording → $p^{\text{cal}}_j$.
+- **Cougher-level**: average probabilities per cougher:
+
+  $\bar{p}^{\text{cal}} = \frac{1}{m}\sum_{j=1}^m p^{\text{cal}}_j$
 
 CatBoost often improves waveform-level discrimination, and the speaker-level aggregation typically stabilizes decisions by pooling multiple recordings.
 
@@ -138,15 +137,14 @@ CatBoost often improves waveform-level discrimination, and the speaker-level agg
 ## 9) Conformal prediction (model-agnostic uncertainty)
 
 As with LR, we use inductive conformal prediction with:
-\[
-s(\mathbf{x}, y) = 1 - \hat{p}^{\text{cal}}(y \mid \mathbf{x}),
-\]
+
+$s(\mathbf{x}, y) = 1 - \hat{p}^{\text{cal}}(y \mid \mathbf{x})$
+
 and quantiles \(q̂(\alpha)\) computed on the CP-calibration subset.
 
 Prediction sets are:
-\[
-\Gamma_\alpha(\mathbf{x}) = \{y \in \{0,1\} \;:\; 1-\hat{p}^{\text{cal}}(y\mid \mathbf{x}) \le q̂(\alpha)\}.
-\]
+
+$\Gamma_\alpha(\mathbf{x}) = \{y \in \{0,1\} \;:\; 1-\hat{p}^{\text{cal}}(y\mid \mathbf{x}) \le q̂(\alpha)\}$
 
 We report coverage, set size, and singleton rate (commonly for \(\alpha=0.10\) and \(\alpha=0.05\)), primarily **at cougher level**.
 
@@ -159,14 +157,3 @@ We report coverage, set size, and singleton rate (commonly for \(\alpha=0.10\) a
 - Because we keep the splitting and calibration protocol identical across LR and CatBoost, performance differences are more credibly attributed to the modeling choice rather than evaluation artifacts.
 
 ---
-
-## 11) Where to look in the code
-
-Search for:
-- CatBoost model construction (fixed settings above),
-- the CatBoost hyperparameter grid,
-- the inner-CV tuning loop (mean UAR with fold-wise Youden thresholds),
-- OOF scoring + isotonic fit,
-- threshold selection on the CP-calibration subset,
-- conformal quantile computation and prediction-set evaluation.
-"""

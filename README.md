@@ -1,4 +1,4 @@
-# Reproducible-TB-Screening-from-Cough-Audio
+# TB-Screening-from-Cough-Audio
 Source code for paper titled "Reproducible TB Screening from Cough Audio: Baseline Models, Clinical Variables, and Uncertainty Quantification"
 
 This repository provides a **reproducible baseline pipeline** for tuberculosis (TB) screening from **cough audio** (acoustic features) optionally augmented with **clinical inputs**, evaluated under a **speaker-independent nested cross-validation** protocol. It also includes **probability calibration** and **model-agnostic conformal prediction** to quantify uncertainty via **set-valued predictions**.
